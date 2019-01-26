@@ -18,6 +18,8 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
         <!-- masked input -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js" crossorigin="anonymous"></script>        
+        <!-- mask money -->
+        <script src="<?php echo base_url('assets/js/maskMoney.js'); ?>"></script>
     </head>
     <body>
         <div class="">
@@ -129,6 +131,26 @@
             $('#modalGenerico').on('hidden.bs.modal', modal.hidden)
             $('#modalGenerico').modal()
             $('#modalGenerico').modal()
+        }
+
+        const removerMascaraDinheiro = valor => {
+            valor = valor.split('R$ ').join('')
+            if (valor.indexOf(",") != -1) 
+                valor = valor.split('.').join('')
+
+            return parseFloat(valor.split(',').join('.'))
+        }
+
+        const adicionarMascaraDinheiro = valor => {
+            if(typeof valor === 'string')
+                valor = parseFloat(valor)
+
+            valor = valor.toFixed(2)
+            valor = valor.toString().replace(/\D/g,"")
+            valor = valor.toString().replace(/(\d)(\d{8})$/,"$1.$2")
+            valor = valor.toString().replace(/(\d)(\d{5})$/,"$1.$2")
+            valor = valor.toString().replace(/(\d)(\d{2})$/,"$1,$2")
+            return "R$ "+valor;
         }
     </script>
 </html>
