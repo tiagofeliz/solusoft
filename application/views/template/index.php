@@ -105,7 +105,7 @@
         const exception = request => {
             console.log(request)
             makeToast({
-                titulo: 'Erro ao listar clientes',
+                titulo: request.titulo,
                 mensagem: `${request.status} - ${request.statusText}`
             })
         }
