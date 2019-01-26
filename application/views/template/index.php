@@ -105,7 +105,7 @@
         const exception = request => {
             console.log(request)
             makeToast({
-                titulo: request.titulo,
+                titulo: "Ocorreu um erro no processo",
                 mensagem: `${request.status} - ${request.statusText}`
             })
         }
