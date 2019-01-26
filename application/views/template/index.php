@@ -15,6 +15,7 @@
     <body>
         <div class="container-fluid">
             <div class="row">
+                <!-- menu -->
                 <div class="col-sm-12">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light">
                         <a class="navbar-brand" href="#">Solusoft</a>
@@ -46,6 +47,10 @@
                         </div>
                     </nav>
                 </div>
+            </div>
+            <!-- conteúdo -->
+            <div class="row">
+                <?php if(isset($page)) $this->load->view($page); ?>
             </div>
         </div>
 
