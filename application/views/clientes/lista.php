@@ -3,7 +3,7 @@
         <h4><i class="fas fa-users"></i> Clientes</h4>
     </div>
     <div class="text-center menu menu-opcoes">
-        <a href="#" class="btn btn-primary btn-block" role="button"><i class="fas fa-user-plus"></i> Novo cliente</a>
+        <a href="<?php echo site_url('clientes/cadastro'); ?>" class="btn btn-primary btn-block" role="button"><i class="fas fa-user-plus"></i> Novo cliente</a>
     </div>
 </div>
 <div class="col-lg-9 col-md-12" id="conteudo">
@@ -19,19 +19,38 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($clientes as $cliente) { ?>
-                <tr>
-                    <td><?php echo $cliente->nome; ?></td>
-                    <td><?php echo $cliente->cpf; ?></td>
-                    <td><?php echo $cliente->sexo; ?></td>
-                    <td><?php echo $cliente->email; ?></td>
-                    <td>
-                        <a href="<?php echo site_url("clientes/editar/$cliente->id"); ?>" class="btn btn-warning btn-sm btn-tr" role="button"><i class="fas fa-edit"></i></a>
-                        <a href="#" class="btn btn-danger btn-sm btn-tr" role="button"><i class="fas fa-times-circle"></i></a>
-                    </td>
-                </tr>
-                <?php } ?>
+                
             </tbody>
         </table>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url : "<?php echo site_url('clientes/lista'); ?>",
+            type : 'get'
+        })
+        .done(function(response){
+            let clientes = JSON.parse(response)
+            $(clientes).each(function () {
+                $("tbody").html(`
+                    <tr>
+                        <td>${this.nome}</td>
+                        <td>${this.cpf}</td>
+                        <td>${this.sexo}</td>
+                        <td>${this.email}</td>
+                        <td>
+                            <a href="<?php echo site_url("clientes/editar"); ?>/${this.id}" class="btn btn-warning btn-sm btn-tr" role="button"><i class="fas fa-edit"></i></a>
+                            <a href="#" class="btn btn-danger btn-sm btn-tr" role="button"><i class="fas fa-times-circle"></i></a>
+                        </td>
+                    </tr>
+                `);
+            })
+        })
+        .fail(function(jqXHR){
+            bloquearCampos(false)
+            exception(jqXHR)
+        })
+    })
+</script>
