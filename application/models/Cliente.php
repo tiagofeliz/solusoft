@@ -19,4 +19,8 @@ class Cliente extends CI_Model {
     public function atualizar($id){
         return $this->db->update('clientes', $this, array('id' => $id));
     }
+
+    public function get_clientes(){
+        return $this->db->get('clientes')->result();
+    }
 }

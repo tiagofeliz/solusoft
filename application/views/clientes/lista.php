@@ -19,16 +19,18 @@
                 </tr>
             </thead>
             <tbody>
+                <?php foreach ($clientes as $cliente) { ?>
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
+                    <td><?php echo $cliente->nome; ?></td>
+                    <td><?php echo $cliente->cpf; ?></td>
+                    <td><?php echo $cliente->sexo; ?></td>
+                    <td><?php echo $cliente->email; ?></td>
                     <td>
-                        <a href="#" class="btn btn-warning btn-sm btn-tr" role="button"><i class="fas fa-edit"></i></a>
+                        <a href="<?php echo site_url("clientes/editar/$cliente->id"); ?>" class="btn btn-warning btn-sm btn-tr" role="button"><i class="fas fa-edit"></i></a>
                         <a href="#" class="btn btn-danger btn-sm btn-tr" role="button"><i class="fas fa-times-circle"></i></a>
                     </td>
                 </tr>
+                <?php } ?>
             </tbody>
         </table>
     </div>
