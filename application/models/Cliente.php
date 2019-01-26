@@ -24,7 +24,11 @@ class Cliente extends CI_Model {
         return $this->db->delete('clientes', array('id' => $this->id));
     }
 
-    public function get_clientes(){
+    public function getClientes(){
         return $this->db->get('clientes')->result();
+    }
+
+    public function getCliente(){
+        return $this->db->get_where('clientes', array('id' => $this->id))->row();
     }
 }
