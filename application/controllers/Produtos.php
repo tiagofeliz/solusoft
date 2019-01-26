@@ -6,6 +6,12 @@ class Produtos extends CI_Controller {
 	private $template = 'template/index';
 	private $dados = [];
 
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->library(array('Util'));
+	}
+
 	public function index()
 	{
 		$this->dados['page'] = 'produtos/lista';
