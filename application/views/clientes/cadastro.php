@@ -24,9 +24,9 @@
             <label for="exampleInputPassword1">Sexo</label>
             <select name="sexo" class="form-control" id="sexo">
                 <option value="">Selecione</option>
-                <option value="masculino">Masculino</option>
-                <option value="feminino">Feminino</option>
-                <option value="outro">Não listado</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Feminino">Feminino</option>
+                <option value="Não listado">Não listado</option>
             </select>
         </div>
     </div>
