@@ -34,7 +34,7 @@
         .done(function(response){
             let clientes = JSON.parse(response)
             $(clientes).each(function () {
-                $("tbody").html(`
+                $("tbody").append(`
                     <tr>
                         <td>${this.nome}</td>
                         <td>${this.cpf}</td>
