@@ -102,6 +102,8 @@
         </div>
     </body>
     <script>
+        $('.cpf').mask('999.999.999-99')
+
         const exception = request => {
             console.log(request)
             makeToast({

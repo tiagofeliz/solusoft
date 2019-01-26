@@ -18,7 +18,7 @@
         </div>
         <div class="col-lg-3">
             <label for="cpf">Cpf</label>
-            <input name="cpf" class="form-control" id="cpf" placeholder="000.000.000-00">
+            <input name="cpf" class="form-control cpf" id="cpf" placeholder="000.000.000-00">
         </div>
         <div class="col-lg-3">
             <label for="exampleInputPassword1">Sexo</label>
@@ -32,8 +32,6 @@
     </div>
 </div>
 <script>
-    $('#cpf').mask('999.999.999-99')
-
     $('#salvar').click(function (){
         let cliente = {
             nome: $('#nome').val(),
