@@ -46,7 +46,7 @@
         }else{
             makeToast({
                 titulo: "Atenção",
-                mensagem: "Preencha todos os campos para cadastrar o cliente"
+                mensagem: "Preencha todos os campos para editar o cliente"
             })
         }
     })
