@@ -27,6 +27,10 @@
 
 <script>
     $(document).ready(function () {
+        listarClientes()
+    })
+
+    const listarClientes = () => {
         $.ajax({
             url : "<?php echo site_url('clientes/lista'); ?>",
             type : 'get'
@@ -35,14 +39,14 @@
             let clientes = JSON.parse(response)
             $(clientes).each(function () {
                 $("tbody").append(`
-                    <tr>
+                    <tr id="cliente-${this.id}">
                         <td>${this.nome}</td>
                         <td>${this.cpf}</td>
                         <td>${this.sexo}</td>
                         <td>${this.email}</td>
                         <td>
                             <a href="<?php echo site_url("clientes/editar"); ?>/${this.id}" class="btn btn-warning btn-sm btn-tr" role="button"><i class="fas fa-edit"></i></a>
-                            <a href="#" class="btn btn-danger btn-sm btn-tr" role="button"><i class="fas fa-times-circle"></i></a>
+                            <button type="button" onclick="confirmarRemocao(${this.id}, '${this.nome}')" class="btn btn-danger btn-sm btn-tr" role="button"><i class="fas fa-times-circle"></i></a>
                         </td>
                     </tr>
                 `);
@@ -52,5 +56,32 @@
             bloquearCampos(false)
             exception(jqXHR)
         })
-    })
+    }
+
+    const confirmarRemocao = (id, nome) => {
+        makeModal({
+            titulo: `Remover cliente`,
+            mensagem: `Deseja realmente remover o cliente ${nome}?`,
+            footer: `
+                <button onclick="removerCliente(${id})" type="button" class="btn btn-danger" data-dismiss="modal">Sim</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+            `
+        })
+    }
+
+    const removerCliente = id => {
+        $.ajax({
+            url : "<?php echo site_url('clientes/remover'); ?>",
+            type : 'post',
+            data : {
+                id
+            },
+        })
+        .done(function(response){
+            $(`#cliente-${id}`).remove()
+        })
+        .fail(function(jqXHR){
+            exception(jqXHR)
+        })
+    }
 </script>

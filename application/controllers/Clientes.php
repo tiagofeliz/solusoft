@@ -38,4 +38,11 @@ class Clientes extends CI_Controller {
 		$this->cliente->sexo = $this->input->post("sexo");
 		echo $this->cliente->inserir();
 	}
+	
+	public function remover()
+	{
+		$this->load->model('Cliente', 'cliente', true);
+		$this->cliente->id = $this->input->post("id");
+		$this->cliente->remover();
+	}
 }

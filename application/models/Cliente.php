@@ -19,6 +19,10 @@ class Cliente extends CI_Model {
     public function atualizar(){
         return $this->db->update('clientes', $this, array('id' => $this->id));
     }
+ 
+    public function remover(){
+        return $this->db->delete('clientes', array('id' => $this->id));
+    }
 
     public function get_clientes(){
         return $this->db->get('clientes')->result();
