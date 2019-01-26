@@ -20,7 +20,7 @@ class Clientes extends CI_Controller {
 		$this->load->view($this->template, $this->dados);
 	}
 
-	public function lista()
+	public function listar()
 	{
 		$this->load->model('Cliente', 'cliente', true);
 
@@ -43,6 +43,6 @@ class Clientes extends CI_Controller {
 	{
 		$this->load->model('Cliente', 'cliente', true);
 		$this->cliente->id = $this->input->post("id");
-		$this->cliente->remover();
+		echo $this->cliente->remover();
 	}
 }

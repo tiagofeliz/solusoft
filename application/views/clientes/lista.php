@@ -32,7 +32,7 @@
 
     const listarClientes = () => {
         $.ajax({
-            url : "<?php echo site_url('clientes/lista'); ?>",
+            url : "<?php echo site_url('clientes/listar'); ?>",
             type : 'get'
         })
         .done(function(response){
