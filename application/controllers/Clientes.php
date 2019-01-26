@@ -8,22 +8,34 @@ class Clientes extends CI_Controller {
 
 	public function index()
 	{
-		$this->dados['clientes'] = $this->listaClientes();
 		$this->dados['page'] = 'clientes/lista';
-		
+
 		$this->load->view($this->template, $this->dados);
 	}
 
-	public function listaClientes($jquery_request = false)
+	public function cadastro()
+	{
+		$this->dados['page'] = 'clientes/cadastro';
+
+		$this->load->view($this->template, $this->dados);
+	}
+
+	public function lista()
 	{
 		$this->load->model('Cliente', 'cliente', true);
 
 		$clientes = $this->cliente->get_clientes();
 
-		if($jquery_request){
-			echo json_encode($clientes);
-		}else{
-			return $clientes;
-		}
+		echo json_encode($clientes);
+	}
+
+	public function incluir()
+	{
+		$this->load->model('Cliente', 'cliente', true);
+		$this->cliente->nome = $this->input->post("nome");
+		$this->cliente->cpf = $this->input->post("cpf");
+		$this->cliente->email = $this->input->post("email");
+		$this->cliente->sexo = $this->input->post("sexo");
+		echo $this->cliente->inserir();
 	}
 }
