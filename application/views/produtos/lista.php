@@ -43,7 +43,7 @@
                         <td>${this.nome}</td>
                         <td>${this.cor}</td>
                         <td>${this.tamanho}</td>
-                        <td>${this.valor}</td>
+                        <td>${adicionarMascaraDinheiro(this.valor)}</td>
                         <td>
                             <a href="<?php echo site_url("produtos/editar"); ?>/${this.id}" class="btn btn-warning btn-sm btn-tr" role="button"><i class="fas fa-edit"></i></a>
                             <button type="button" onclick="confirmarRemocao(${this.id}, '${this.nome}')" class="btn btn-danger btn-sm btn-tr" role="button"><i class="fas fa-times-circle"></i></a>
