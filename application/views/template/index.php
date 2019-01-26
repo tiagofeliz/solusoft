@@ -152,5 +152,7 @@
             valor = valor.toString().replace(/(\d)(\d{2})$/,"$1,$2")
             return "R$ "+valor;
         }
+
+        const formataData = data => data.split('-').reverse().join('/')
     </script>
 </html>
