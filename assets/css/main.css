@@ -1,4 +1,21 @@
-.container-fluid{
-	margin: 0!important;
-	padding: 0!important;
+#page{
+	margin: 6px;
+}
+
+.menu{
+	background: #f8f9fa;
+    padding: 1em;
+}
+
+.menu-opcoes{
+	margin-top: 6px;	
+}
+
+#conteudo{
+	background: #f8f9fa;
+	padding: .5em 1em;
+}
+
+.btn-tr{
+	color: #fff!important;
 }
