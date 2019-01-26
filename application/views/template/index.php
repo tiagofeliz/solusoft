@@ -38,8 +38,8 @@
                                         <i class="fas fa-chart-bar"></i> Relatórios
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="#">Pedidos</a>
-                                        <a class="dropdown-item" href="#">Totalizador por cliente</a>
+                                        <a class="dropdown-item" href="<?php echo site_url('relatorios/pedidos'); ?>">Pedidos</a>
+                                        <a class="dropdown-item" href="<?php echo site_url('relatorios/totalizadorCliente'); ?>">Totalizador por cliente</a>
                                     </div>
                                 </li>
                             </ul>
