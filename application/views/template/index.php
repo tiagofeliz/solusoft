@@ -78,6 +78,28 @@
                 <!-- Mensagem -->
             </div>
         </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modalGenerico" tabindex="-1" role="dialog" aria-labelledby="modalGenericoLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalGenericoLabel">
+                            <!-- Título -->
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Mensagem -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
     <script>
         const exception = request => {
@@ -94,6 +116,17 @@
             $('.toast .toast-header strong').html(toast.titulo)
             $('.toast .toast-body').html(toast.mensagem)
             $('.toast').toast('show')
+        }
+
+        const makeModal = modal => {
+            $('.modal .modal-title').html(modal.titulo)
+            $('.modal .modal-body').html(modal.mensagem)
+            if(modal.footer != undefined){
+                $('.modal .modal-footer').html(modal.footer)
+            }
+            $('#modalGenerico').on('hidden.bs.modal', modal.hidden)
+            $('#modalGenerico').modal()
+            $('#modalGenerico').modal()
         }
     </script>
 </html>
