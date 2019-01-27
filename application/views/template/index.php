@@ -124,13 +124,12 @@
         }
 
         const makeModal = modal => {
-            $('.modal .modal-title').html(modal.titulo)
-            $('.modal .modal-body').html(modal.mensagem)
+            $('#modalGenerico .modal-title').html(modal.titulo)
+            $('#modalGenerico .modal-body').html(modal.mensagem)
             if(modal.footer != undefined){
-                $('.modal .modal-footer').html(modal.footer)
+                $('#modalGenerico .modal-footer').html(modal.footer)
             }
             $('#modalGenerico').on('hidden.bs.modal', modal.hidden)
-            $('#modalGenerico').modal()
             $('#modalGenerico').modal()
         }
 
