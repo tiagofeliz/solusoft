@@ -1,6 +1,6 @@
 <div class="col-lg-3 col-md-12" id="menu">
     <div class="text-center menu menu-titulo">
-        <h4><i class="fas fa-user-edit"></i> Editando produto</h4>
+        <h4><i class="fas fa-pen-square"></i> Editando produto</h4>
     </div>
     <div class="text-center menu menu-opcoes">
         <button id="salvar" type="button" class="btn btn-primary btn-block"><i class="fas fa-save"></i> Salvar</a>
