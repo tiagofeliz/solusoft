@@ -165,6 +165,7 @@
     }
 
     let produtos = []
+    let produtos_remover = []
 
     let index_produto = 0
 
@@ -323,6 +324,9 @@
 
     const removerProduto = index_selecionado => {
         $(`#produto-${index_selecionado}`).remove()
+        if(produtos[index_selecionado].itens_pedidos_id != null){
+            produtos_remover.push(produtos[index_selecionado].itens_pedidos_id)
+        }
         delete produtos[index_selecionado]
         atualizarInformacoesGlobais()
     }
@@ -356,6 +360,7 @@
             id: PEDIDO_ID,
             cliente,
             produtos,
+            produtos_remover,
             data: formataData($('#data').val(), 'yyyy-mm-dd'),
             forma_pagamento: $('#forma_pagamento').val(),
             observacao: $('#observacao').val()
@@ -410,6 +415,7 @@
             makeModal({
                 titulo: 'Sucesso',
                 mensagem: `O pedido foi atualizado com sucesso`,
+                footer: undefined,
                 hidden: function (e) {
                     window.location.href='<?php echo site_url("pedidos"); ?>'
                 }

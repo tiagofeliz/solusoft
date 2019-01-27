@@ -40,6 +40,10 @@ class Pedido extends CI_Model {
     public function removerProdutosPedido(){
         return $this->db->delete('itens_pedidos', array('pedido_id' => $this->id));
     }
+ 
+    public function removerProdutoPedido($id){
+        return $this->db->delete('itens_pedidos', array('id' => $id));
+    }
 
     public function getPedidos(){
         $this->db->select('pedidos.*')

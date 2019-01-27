@@ -96,6 +96,15 @@ class Pedidos extends CI_Controller {
 				$this->pedido->atualizarProduto($item_pedido, $produto->itens_pedidos_id);
 			}
 		}
+		if(count($pedido->produtos_remover) > 0) $this->removerProdutoPedido($pedido->produtos_remover);
+	}
+	
+	public function removerProdutoPedido($produtos_remover)
+	{
+		$this->load->model('Pedido', 'pedido', true);
+		foreach($produtos_remover as $produto){
+			$this->pedido->removerProdutoPedido($produto);
+		}
 	}
 	
 	public function remover()
