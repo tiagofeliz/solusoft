@@ -45,7 +45,8 @@
                         <td>${this.forma_pagamento}</td>
                         <td>${this.observacao}</td>
                         <td>
-                        <a href="<?php echo site_url("pedidos/detalhes"); ?>/${this.id}" class="btn btn-info btn-sm btn-tr" role="button"><i class="fas fa-eye"></i></a>
+                        <a href="<?php echo site_url("pedidos/imprimir"); ?>/${this.id}" class="btn btn-danger btn-sm btn-tr" role="button"><i class="fas fa-file-pdf"></i></a>
+                        <a href="<?php echo site_url("pedidos/enviarEmail"); ?>/${this.id}" class="btn btn-info btn-sm btn-tr" role="button"><i class="fas fa-paper-plane"></i></a>
                             <a href="<?php echo site_url("pedidos/editar"); ?>/${this.id}" class="btn btn-warning btn-sm btn-tr" role="button"><i class="fas fa-edit"></i></a>
                             <button type="button" onclick="confirmarRemocao(${this.id})" class="btn btn-danger btn-sm btn-tr" role="button"><i class="fas fa-times-circle"></i></a>
                         </td>
