@@ -28,6 +28,11 @@ class Pedido extends CI_Model {
         return $this->db->update('pedidos', $this, array('id' => $this->id));
     }
  
+    public function atualizarProduto($produto, $itens_produtos_id){
+        $this->db->where('id', $itens_produtos_id);
+        return $this->db->set($produto)->update('itens_pedidos');
+    }
+ 
     public function remover(){
         if($this->removerProdutosPedido()) return $this->db->delete('pedidos', array('id' => $this->id));
     }
@@ -48,7 +53,28 @@ class Pedido extends CI_Model {
     }
 
     public function getPedido(){
-        return $this->db->get_where('pedidos', array('id' => $this->id))->row();
+        $this->db->select('pedidos.*')
+                 ->select('clientes.nome')
+                 ->select('clientes.sexo')
+                 ->select('clientes.cpf')
+                 ->select('clientes.email')
+                 ->from('clientes')
+                 ->where('pedidos.cliente_id = clientes.id');
+        return $this->db->get_where('pedidos', array('pedidos.id' => $this->id))->row();
+    }
+
+    public function produtosPedido($pedido_id){
+        $this->db->select('itens_pedidos.id')
+                 ->select('itens_pedidos.pedido_id')
+                 ->select('itens_pedidos.produto_id')
+                 ->select('itens_pedidos.quantidade')
+                 ->select('produtos.nome')
+                 ->select('produtos.cor')
+                 ->select('produtos.tamanho')
+                 ->select('produtos.valor')
+                 ->from('produtos')
+                 ->where('itens_pedidos.produto_id = produtos.id');
+        return $this->db->get_where('itens_pedidos', array('pedido_id' => $pedido_id))->result();
     }
 
     public function pedidosCliente($cliente_id){

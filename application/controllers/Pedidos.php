@@ -61,15 +61,41 @@ class Pedidos extends CI_Controller {
 		}
 	}
 
+	public function buscarPedido($id)
+	{
+		$this->load->model('Pedido', 'pedido', true);
+
+		$this->pedido->id = $id;
+		$pedido = $this->pedido->getPedido();
+
+		$pedido->produtos = $this->pedido->produtosPedido($id);
+
+		echo json_encode($pedido);
+	}
+
 	public function atualizar()
 	{
 		$this->load->model('Pedido', 'pedido', true);
-		$this->pedido->id = $this->input->post("id");
-		$this->pedido->nome = $this->input->post("nome");
-		$this->pedido->cpf = $this->input->post("cpf");
-		$this->pedido->email = $this->input->post("email");
-		$this->pedido->sexo = $this->input->post("sexo");
-		echo $this->pedido->atualizar();
+		$pedido = json_decode($this->input->post('pedido'));
+		$this->pedido->id = $pedido->id;
+		$this->pedido->data = $pedido->data;
+		$this->pedido->observacao = $pedido->observacao;
+		$this->pedido->forma_pagamento = $pedido->forma_pagamento;
+		$this->pedido->cliente_id = $pedido->cliente->id;
+		$this->pedido->atualizar();
+		foreach($pedido->produtos as $produto){
+			$item_pedido = array(
+				'pedido_id' => $this->pedido->id,
+				'produto_id' => $produto->id,
+				'quantidade' => $produto->quantidade
+			);
+
+			if($produto->itens_pedidos_id == null){
+				$this->pedido->inserirProduto($item_pedido);
+			}else{
+				$this->pedido->atualizarProduto($item_pedido, $produto->itens_pedidos_id);
+			}
+		}
 	}
 	
 	public function remover()
