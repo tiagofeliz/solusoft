@@ -9,7 +9,7 @@ class Produtos extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->library(array('Util'));
+		$this->load->helper('util');
 	}
 
 	public function index()
