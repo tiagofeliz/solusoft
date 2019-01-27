@@ -24,7 +24,7 @@
         </div>
         <div class="col-lg-2">
             <label for="valor">Valor</label>
-            <input name="valor" class="form-control" id="valor" placeholder='Ex.: R$ 0,00' value="<?php echo $this->util->formataValor($produto->valor); ?>">
+            <input name="valor" class="form-control" id="valor" placeholder='Ex.: R$ 0,00' value="<?php echo formataValor($produto->valor); ?>">
         </div>
     </div>
 </div>
