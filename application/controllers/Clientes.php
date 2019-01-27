@@ -67,6 +67,15 @@ class Clientes extends CI_Controller {
 	{
 		$this->load->model('Cliente', 'cliente', true);
 		$this->cliente->id = $this->input->post("id");
-		echo $this->cliente->remover();
+		if($this->pedidosCliente($this->cliente->id) == null){
+			echo $this->cliente->remover();
+		}else{
+			echo 'false';
+		}
+	}
+	
+	public function pedidosCliente($id){
+		$this->load->model('Pedido', 'pedido', true);
+		return $this->pedido->pedidosCliente($id);
 	}
 }

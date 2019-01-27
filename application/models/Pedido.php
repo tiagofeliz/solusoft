@@ -43,4 +43,8 @@ class Pedido extends CI_Model {
     public function getPedido(){
         return $this->db->get_where('pedidos', array('id' => $this->id))->row();
     }
+
+    public function pedidosCliente($cliente_id){
+        return $this->db->get_where('pedidos', array('cliente_id' => $cliente_id))->result();
+    }
 }

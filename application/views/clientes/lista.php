@@ -78,7 +78,14 @@
             },
         })
         .done(function(response){
-            $(`#cliente-${id}`).remove()
+            if(JSON.parse(response)){
+                $(`#cliente-${id}`).remove()
+            }else{
+                makeToast({
+                    titulo: `Atenção`,
+                    mensagem: `Este cliente não pode ser removido por possuir pedidos vinculados ao seu cadastro!`
+                })
+            }
         })
         .fail(function(jqXHR){
             exception(jqXHR)
