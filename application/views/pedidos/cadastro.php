@@ -13,7 +13,7 @@
                 <div class="input-group-prepend">
                     <div class="input-group-text">Valor Total: </div>
                 </div>
-                <input disabled="" type="text" class="form-control" value="R$ 0,00" />
+                <input id="valor-total" disabled="" type="text" class="form-control" value="R$ 0,00" />
             </div>
         </div>
         <div class="col-lg-3">
@@ -21,7 +21,7 @@
                 <div class="input-group-prepend">
                     <div class="input-group-text">Total de Itens: </div>
                 </div>
-                <input disabled="" type="text" class="form-control" value="0" />
+                <input id="quantidade-total" disabled="" type="text" class="form-control" value="0" />
             </div>
         </div>
     </div>
@@ -55,7 +55,7 @@
         </div>
     </div>
     <br>
-    <div class="row">
+    <div class="row" style="overflow-y: auto">
         <div class="col-lg-12" id="produtos">
             <div class="table-responsive">
                 <table class="table table-hover">
@@ -244,20 +244,39 @@
         }
 
         $("#produtos tbody").append(`
-            <tr id="produto-${index_produto}">
+            <tr id="produto-${index_produto}" data-index-produto="${index_produto}">
                 <td>${nome}</td>
                 <td>${cor}</td>
                 <td>${tamanho}</td>
                 <td>${adicionarMascaraDinheiro(valor)}</td>
-                <td><input onchange="alterarValor(${index_produto})" class="text-center form-control apenas-numeros" value="0" /></td>
-                <td>${adicionarMascaraDinheiro(0)}</td>
+                <td><input type="number" onchange="alterarValor(this, ${index_produto})" class="text-center form-control apenas-numeros" value="0" /></td>
+                <td class="total-produto">${adicionarMascaraDinheiro(0)}</td>
                 <td>
                     <button type="button" onclick="confirmarRemocao(${index_produto})" class="btn btn-danger btn-sm btn-tr" role="button"><i class="fas fa-times-circle"></i></a>
                 </td>
             </tr>
         `);
 
+        $('.apenas-numeros').keypress(function (event) {
+            var tecla = (window.event) ? event.keyCode : event.which;
+            if ((tecla > 47 && tecla < 58))
+                return true;
+            else {
+                if (tecla != 8){
+                    makeToast({
+                        titulo: "Atenção",
+                        mensagem: "Para a quantidade do produto, você deve inserir apenas dígitos válidos"
+                    })
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        });
+
         index_produto++
+
+        atualizarInformacoesGlobais()
     }
 
     const confirmarRemocao = index_selecionado => {
@@ -274,12 +293,46 @@
     const removerProduto = index_selecionado => {
         $(`#produto-${index_selecionado}`).remove()
         delete produtos[index_selecionado]
+        atualizarInformacoesGlobais()
+    }
+
+    const alterarValor = (input, index_selecionado) => {
+        let quantidade = parseInt($(input).val())
+        if(quantidade < 0){
+            $(input).val(0).change()
+        }else{
+            produtos[index_selecionado].quantidade = parseInt($(input).val())
+            $(`#produto-${index_selecionado} .total-produto`).text(adicionarMascaraDinheiro(produtos[index_selecionado].quantidade * produtos[index_selecionado].valor))
+        }
+        atualizarInformacoesGlobais()
+    }
+
+    const atualizarInformacoesGlobais = () => {
+        let valorTotal = 0
+        let quantidadeTotal = 0
+        $('#produtos tbody tr').each(function(){
+            let index_produto = $(this).attr('data-index-produto')
+            quantidadeTotal += produtos[index_produto].quantidade
+            valorTotal += produtos[index_produto].valor * produtos[index_produto].quantidade
+            console.log(valorTotal)
+        })
+        $('#valor-total').val(adicionarMascaraDinheiro(valorTotal))
+        $('#quantidade-total').val(quantidadeTotal)
     }
 
     $('#salvar').click(function (){
 
-        if(validaProduto(produto)){
-            incluirProduto(produto)
+        let pedido = []
+        pedido['cliente'] = cliente
+        pedido['produtos'] = produtos
+        pedido['data'] = $('#data').val()
+        pedido['forma_pagamento'] = $('#forma_pagamento').val()
+        pedido['observacao'] = $('#forma_pagamento').val()
+
+        console.log(pedido)
+        if(validaPedido(pedido)){
+            alert('ok')
+            // incluirProduto(pedido)
         }else{
             makeToast({
                 titulo: "Atenção",
@@ -288,8 +341,26 @@
         }
     })
 
-    const validaPedido = () => {
-        return false
+    const validaPedido = pedido => {
+        // validando cliente
+        if(pedido['cliente'].id == null){
+            return false
+        }
+
+        // validando produtos
+        pedido['produtos'] = pedido['produtos'].filter(function (elem, i, array) {
+            return elem !== undefined
+        })
+        if(pedido['produtos'].length <= 0) {
+            return false
+        }
+
+        // validando demais dados
+        if(pedido['data'] == "" || pedido['forma_pagamento'] == ""){
+            return false
+        }
+
+        return true
     }
 
     const incluirPedido = pedido => {

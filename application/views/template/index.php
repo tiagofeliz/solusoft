@@ -59,12 +59,12 @@
             </div>
             <!-- conteúdo -->
             <div class="row" id="page">
-                <?php if(isset($page)) $this->load->view($page); ?>
+                <?php $this->load->view($page); ?>
             </div>
         </div>
 
         <!-- toast -->
-        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000">
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000" style="position: absolute; top: 0; left: 0;">
             <div class="toast-header">
                 <strong class="mr-auto">
                     <!-- Titulo -->
