@@ -62,7 +62,7 @@
     const confirmarRemocao = id => {
         makeModal({
             titulo: `Remover pedido`,
-            mensagem: `Deseja realmente remover este pedido?`,
+            mensagem: `Todos os registros do pedido serão perdidos. Deseja realmente remover este pedido?`,
             footer: `
                 <button onclick="removerPedido(${id})" type="button" class="btn btn-danger" data-dismiss="modal">Sim</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
@@ -71,6 +71,7 @@
     }
 
     const removerPedido = id => {
+        console.log(id)
         $.ajax({
             url : "<?php echo site_url('pedidos/remover'); ?>",
             type : 'post',

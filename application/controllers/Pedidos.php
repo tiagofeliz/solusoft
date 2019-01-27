@@ -76,6 +76,8 @@ class Pedidos extends CI_Controller {
 	{
 		$this->load->model('Pedido', 'pedido', true);
 		$this->pedido->id = $this->input->post("id");
-		echo $this->pedido->remover();
+		if(!$this->pedido->remover()){
+			echo 'false';
+		}
 	}
 }

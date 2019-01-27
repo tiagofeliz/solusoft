@@ -29,12 +29,19 @@ class Pedido extends CI_Model {
     }
  
     public function remover(){
-        return $this->db->delete('pedidos', array('id' => $this->id));
+        if($this->removerProdutosPedido()) return $this->db->delete('pedidos', array('id' => $this->id));
+    }
+ 
+    public function removerProdutosPedido(){
+        return $this->db->delete('itens_pedidos', array('pedido_id' => $this->id));
     }
 
     public function getPedidos(){
         $this->db->select('pedidos.*')
-                 ->select('clientes.*')
+                 ->select('clientes.nome')
+                 ->select('clientes.sexo')
+                 ->select('clientes.cpf')
+                 ->select('clientes.email')
                  ->from('clientes')
                  ->where('pedidos.cliente_id = clientes.id');
         return $this->db->get('pedidos')->result();
