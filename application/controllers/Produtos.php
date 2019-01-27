@@ -73,6 +73,15 @@ class Produtos extends CI_Controller {
 	{
 		$this->load->model('Produto', 'produto', true);
 		$this->produto->id = $this->input->post("id");
-		echo $this->produto->remover();
+		if($this->pedidosProduto($this->produto->id) == null){
+			echo $this->produto->remover();
+		}else{
+			echo 'false';
+		}
+	}
+	
+	public function pedidosProduto($id){
+		$this->load->model('Pedido', 'pedido', true);
+		return $this->pedido->pedidosProduto($id);
 	}
 }

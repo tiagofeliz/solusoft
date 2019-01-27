@@ -78,7 +78,14 @@
             },
         })
         .done(function(response){
-            $(`#produto-${id}`).remove()
+            if(JSON.parse(response)){
+                $(`#produto-${id}`).remove()
+            }else{
+                makeToast({
+                    titulo: `Atenção`,
+                    mensagem: `Este produto não pode estar incluídos em pedidos já gravados!`
+                })
+            }
         })
         .fail(function(jqXHR){
             exception(jqXHR)
