@@ -6,6 +6,13 @@ class Pedidos extends CI_Controller {
 	private $template = 'template/index';
 	private $dados = [];
 
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->library(array('Util', 'email'));
+		$this->load->helper('util');
+	}
+
 	public function index()
 	{
 		$this->dados['page'] = 'pedidos/lista';
@@ -61,7 +68,7 @@ class Pedidos extends CI_Controller {
 		}
 	}
 
-	public function buscarPedido($id)
+	public function buscarPedido($id, $json = true)
 	{
 		$this->load->model('Pedido', 'pedido', true);
 
@@ -70,7 +77,11 @@ class Pedidos extends CI_Controller {
 
 		$pedido->produtos = $this->pedido->produtosPedido($id);
 
-		echo json_encode($pedido);
+		if($json){
+			echo json_encode($pedido);
+		}else{
+			return $pedido;
+		}
 	}
 
 	public function atualizar()
@@ -114,5 +125,26 @@ class Pedidos extends CI_Controller {
 		if(!$this->pedido->remover()){
 			echo 'false';
 		}
+	}
+
+	public function enviaPedidoEmail()
+	{
+		$pedido = $this->buscarPedido($this->input->post('id'), false);
+
+		$this->email->initialize($this->util->parametrosEmail());
+		$this->email->from('tiagofeliz.solusoft@gmail.com', 'Solusoft');
+		$this->email->to($pedido->email);
+		$this->email->subject('Pedido Solusoft');
+
+		$htmlEmail = $this->load->view(
+			'pedidos/pedido_enviar.php', // página do email
+			array(
+				'pedido' => $pedido // dados do pedido
+			),
+			true
+		);
+
+		$this->email->message($htmlEmail);
+		echo $this->email->send();
 	}
 }
