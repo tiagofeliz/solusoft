@@ -378,6 +378,7 @@
             makeModal({
                 titulo: 'Sucesso',
                 mensagem: `O pedido foi realizado com sucesso`,
+                footer: undefined,
                 hidden: function (e) {
                     window.location.href='<?php echo site_url("pedidos"); ?>'
                 }

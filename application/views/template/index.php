@@ -126,9 +126,7 @@
         const makeModal = modal => {
             $('#modalGenerico .modal-title').html(modal.titulo)
             $('#modalGenerico .modal-body').html(modal.mensagem)
-            if(modal.footer != undefined){
-                $('#modalGenerico .modal-footer').html(modal.footer)
-            }
+            $('#modalGenerico .modal-footer').html( (modal.footer != undefined) ? modal.footer : `<button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>`)
             $('#modalGenerico').on('hidden.bs.modal', modal.hidden)
             $('#modalGenerico').modal()
         }
