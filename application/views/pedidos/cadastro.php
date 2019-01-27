@@ -30,7 +30,7 @@
         <div class="col-lg-4">
             <label>Cliente</label>
             <div class="input-group">
-                <input disabled="" type="text" class="form-control" />
+                <input disabled="" name="cliente" id="cliente" class="form-control" />
                 <div class="input-group-append">
                     <button data-toggle="modal" data-target="#selecionar-cliente" class="btn btn-secondary" type="button" id="button-addon2"><i class="fa fa-search"></i></button>
                 </div>
@@ -56,7 +56,7 @@
     </div>
     <br>
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-12" id="produtos">
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead class="thead-light">
@@ -65,7 +65,7 @@
                             <th scope="col">Cor</th>
                             <th scope="col">Tamanho</th>
                             <th scope="col">Valor Unitário</th>
-                            <th scope="col">Quantidade</th>
+                            <th scope="col" style="width: 5%">Quantidade</th>
                             <th scope="col">Valor Total</th>
                             <th scope="col">Opções</th>
                         </tr>
@@ -156,21 +156,128 @@
     </div>
 </div>
 <script>
+
+    let cliente = {
+        id: null,
+        nome: null
+    }
+
+    let produtos = []
+
+    let index_produto = 0
+
     $(document).ready(function () {
-        $('#valor').maskMoney({prefix: 'R$ ', thousands: '.', decimal: ',', allowZero: true})
+        listarClientes()
+        listarProdutos()
     })
+
+    const listarClientes = () => {
+        $.ajax({
+            url : "<?php echo site_url('clientes/listar'); ?>",
+            type : 'get'
+        })
+        .done(function(response){
+            let clientes = JSON.parse(response)
+            $(clientes).each(function () {
+                $("#selecionar-cliente tbody").append(`
+                    <tr id="cliente-${this.id}">
+                        <td>${this.nome}</td>
+                        <td>${this.cpf}</td>
+                        <td>${this.sexo}</td>
+                        <td>${this.email}</td>
+                        <td>
+                            <button type="button" onclick="selecionarCliente(${this.id}, '${this.nome}')" class="btn btn-primary btn-sm btn-tr" role="button" data-dismiss="modal"><i class="fas fa-check"></i></a>
+                        </td>
+                    </tr>
+                `);
+            })
+        })
+        .fail(function(jqXHR){
+            bloquearCampos(false)
+            exception(jqXHR)
+        })
+    }
+
+    const selecionarCliente = (id, nome) => {
+        cliente.id = id
+        cliente.nome = nome
+
+        $('#cliente').val(nome)
+    }
+
+    const listarProdutos = () => {
+        $.ajax({
+            url : "<?php echo site_url('produtos/listar'); ?>",
+            type : 'get'
+        })
+        .done(function(response){
+            let produtos = JSON.parse(response)
+            $(produtos).each(function () {
+                $("#selecionar-produto tbody").append(`
+                    <tr>
+                        <td>${this.nome}</td>
+                        <td>${this.cor}</td>
+                        <td>${this.tamanho}</td>
+                        <td>${adicionarMascaraDinheiro(this.valor)}</td>
+                        <td>
+                            <button type="button" onclick="selecionarProduto(${this.id}, '${this.nome}', '${this.cor}', '${this.tamanho}', ${this.valor})" class="btn btn-primary btn-sm btn-tr" role="button" data-dismiss="modal"><i class="fas fa-check"></i></a>
+                        </td>
+                    </tr>
+                `);
+            })
+        })
+        .fail(function(jqXHR){
+            bloquearCampos(false)
+            exception(jqXHR)
+        })
+    }
+
+    const selecionarProduto = (id, nome, cor, tamanho, valor) => {
+
+        produtos[index_produto] = {
+            id,
+            nome,
+            cor,
+            tamanho,
+            valor,
+            quantidade: 0
+        }
+
+        $("#produtos tbody").append(`
+            <tr id="produto-${index_produto}">
+                <td>${nome}</td>
+                <td>${cor}</td>
+                <td>${tamanho}</td>
+                <td>${adicionarMascaraDinheiro(valor)}</td>
+                <td><input onchange="alterarValor(${index_produto})" class="text-center form-control apenas-numeros" value="0" /></td>
+                <td>${adicionarMascaraDinheiro(0)}</td>
+                <td>
+                    <button type="button" onclick="confirmarRemocao(${index_produto})" class="btn btn-danger btn-sm btn-tr" role="button"><i class="fas fa-times-circle"></i></a>
+                </td>
+            </tr>
+        `);
+
+        index_produto++
+    }
+
+    const confirmarRemocao = index_selecionado => {
+        makeModal({
+            titulo: `Remover produto`,
+            mensagem: `Deseja realmente remover do pedido o produto ${produtos[index_selecionado].nome}?`,
+            footer: `
+                <button onclick="removerProduto(${index_selecionado})" type="button" class="btn btn-danger" data-dismiss="modal">Sim</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+            `
+        })
+    }
+
+    const removerProduto = index_selecionado => {
+        $(`#produto-${index_selecionado}`).remove()
+        delete produtos[index_selecionado]
+    }
 
     $('#salvar').click(function (){
 
-        let valor = ($('#valor').val() == "") ? 0 : removerMascaraDinheiro($('#valor').val())
-
-        let produto = {
-            nome: $('#nome').val(),
-            tamanho: $('#tamanho').val(),
-            cor: $('#cor').val(),
-            valor
-        }
-        
         if(validaProduto(produto)){
             incluirProduto(produto)
         }else{
@@ -181,18 +288,15 @@
         }
     })
 
-    const validaProduto = ({nome, tamanho, cor}) => {
-        if(nome == "" || tamanho == "" || cor == ""){
-            return false
-        }
-        return true
+    const validaPedido = () => {
+        return false
     }
 
-    const incluirProduto = produto => {
+    const incluirPedido = pedido => {
         $.ajax({
-            url : "<?php echo site_url('produtos/incluir'); ?>",
+            url : "<?php echo site_url('pedidos/incluir'); ?>",
             type : 'post',
-            data : produto,
+            data : pedido,
             beforeSend : function(){
                 bloquearCampos(true)
                 makeToast({
@@ -204,7 +308,7 @@
         .done(function(response){
             makeModal({
                 titulo: 'Sucesso',
-                mensagem: `O produto ${produto.nome} foi cadastrado com sucesso`,
+                mensagem: `O pedido foi realizado com sucesso`,
                 hidden: function (e) {
                     window.location.href='<?php echo site_url("produtos"); ?>'
                 }
