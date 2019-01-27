@@ -16,6 +16,14 @@ class Pedido extends CI_Model {
         return $this->db->insert('pedidos', $this);
     }
  
+    public function insert_id(){
+        return $this->db->insert_id();
+    }
+
+    public function inserirProduto($produto){
+        return $this->db->set($produto)->insert('itens_pedidos');
+    }
+ 
     public function atualizar(){
         return $this->db->update('pedidos', $this, array('id' => $this->id));
     }

@@ -314,7 +314,6 @@
             let index_produto = $(this).attr('data-index-produto')
             quantidadeTotal += produtos[index_produto].quantidade
             valorTotal += produtos[index_produto].valor * produtos[index_produto].quantidade
-            console.log(valorTotal)
         })
         $('#valor-total').val(adicionarMascaraDinheiro(valorTotal))
         $('#quantidade-total').val(quantidadeTotal)
@@ -322,17 +321,16 @@
 
     $('#salvar').click(function (){
 
-        let pedido = []
-        pedido['cliente'] = cliente
-        pedido['produtos'] = produtos
-        pedido['data'] = $('#data').val()
-        pedido['forma_pagamento'] = $('#forma_pagamento').val()
-        pedido['observacao'] = $('#forma_pagamento').val()
+        let pedido = {
+            cliente,
+            produtos,
+            data: formataData($('#data').val(), 'yyyy-mm-dd'),
+            forma_pagamento: $('#forma_pagamento').val(),
+            observacao: $('#observacao').val()
+        }
 
-        console.log(pedido)
         if(validaPedido(pedido)){
-            alert('ok')
-            // incluirProduto(pedido)
+            incluirPedido(pedido)
         }else{
             makeToast({
                 titulo: "Atenção",
@@ -367,7 +365,7 @@
         $.ajax({
             url : "<?php echo site_url('pedidos/incluir'); ?>",
             type : 'post',
-            data : pedido,
+            data : {pedido: JSON.stringify(pedido)},
             beforeSend : function(){
                 bloquearCampos(true)
                 makeToast({
@@ -381,7 +379,7 @@
                 titulo: 'Sucesso',
                 mensagem: `O pedido foi realizado com sucesso`,
                 hidden: function (e) {
-                    window.location.href='<?php echo site_url("produtos"); ?>'
+                    window.location.href='<?php echo site_url("pedidos"); ?>'
                 }
             })
         })

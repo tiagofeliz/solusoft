@@ -45,11 +45,20 @@ class Pedidos extends CI_Controller {
 	public function incluir()
 	{
 		$this->load->model('Pedido', 'pedido', true);
-		$this->pedido->nome = $this->input->post("nome");
-		$this->pedido->cpf = $this->input->post("cpf");
-		$this->pedido->email = $this->input->post("email");
-		$this->pedido->sexo = $this->input->post("sexo");
-		echo $this->pedido->inserir();
+		$pedido = json_decode($this->input->post('pedido'));
+		$this->pedido->data = $pedido->data;
+		$this->pedido->observacao = $pedido->observacao;
+		$this->pedido->forma_pagamento = $pedido->forma_pagamento;
+		$this->pedido->cliente_id = $pedido->cliente->id;
+		$this->pedido->inserir();
+		$this->pedido->id = $this->pedido->insert_id();
+		foreach($pedido->produtos as $produto){
+			$this->pedido->inserirProduto(array(
+				'pedido_id' => $this->pedido->id,
+				'produto_id' => $produto->id,
+				'quantidade' => $produto->quantidade
+			));
+		}
 	}
 
 	public function atualizar()
