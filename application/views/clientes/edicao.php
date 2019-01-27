@@ -3,7 +3,8 @@
         <h4><i class="fas fa-user-edit"></i> Editando cliente</h4>
     </div>
     <div class="text-center menu menu-opcoes">
-        <button id="salvar" type="button" class="btn btn-primary btn-block"><i class="fas fa-save"></i> Salvar</a>
+        <button id="salvar" type="button" class="btn btn-primary btn-block"><i class="fas fa-save"></i> Salvar</button>
+        <a href="<?php echo site_url('clientes'); ?>" role="button" class="btn btn-danger btn-block btn-tr"><i class="fas fa-arrow-left"></i> Cancelar Edição</a>
     </div>
 </div>
 <div class="col-lg-9 col-md-12" id="conteudo">
