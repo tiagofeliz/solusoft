@@ -40,7 +40,7 @@
             $(pedidos).each(function () {
                 $("tbody").append(`
                     <tr id="pedido-${this.id}">
-                        <td>${formataData(this.data)}</td>
+                        <td>${formataData(this.data, 'dd/mm/yyyy')}</td>
                         <td>${this.nome}</td>
                         <td>${this.forma_pagamento}</td>
                         <td>${this.observacao}</td>

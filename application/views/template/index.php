@@ -154,6 +154,10 @@
             return "R$ "+valor;
         }
 
-        const formataData = data => data.split('-').reverse().join('/')
+        const formataData = (data, formato) => {
+            if (formato != 'yyyy-mm-dd' && formato != 'dd/mm/yyyy') return data
+            if (formato == 'dd/mm/yyyy') return data.split('-').reverse().join('/')
+            if (formato == 'yyyy-mm-dd') return data.split('/').reverse().join('-')
+        }
     </script>
 </html>
