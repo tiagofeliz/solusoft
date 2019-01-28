@@ -58,6 +58,7 @@ Ambiente de desenvolvimento
 -  SO Linux Mint 19.1 Cinnamon
 -  PHP 7.2.10
 -  MySQL 5.5.56
+-  Apache2
 
 #######
 Atenção
