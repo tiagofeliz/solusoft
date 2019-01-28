@@ -66,3 +66,5 @@ A dependência foi resolvida ao instalar a extensão usando: sudo apt-get instal
 A versão da extensão deve seguir a versão do PHP em execução.
 
 Pode vir ser necessário após resolver as dependências via composer, dar permissão de escrita na pasta do sistema devido a biblioteca mPDF.
+
+O endereço de email tiagofeliz.solusoft@gmail.com foi criado para o envio do pedido para o email do cliente
