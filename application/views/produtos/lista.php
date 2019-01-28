@@ -83,7 +83,7 @@
             }else{
                 makeToast({
                     titulo: `Atenção`,
-                    mensagem: `Este produto não pode estar incluídos em pedidos já gravados!`
+                    mensagem: `Este produto não pode ser removido por estar incluído em pedidos já gravados!`
                 })
             }
         })
