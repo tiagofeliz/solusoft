@@ -1,70 +1,61 @@
-###################
-What is CodeIgniter
-###################
+#########################################
+Teste para a vaga de programador Solusoft
+#########################################
 
-CodeIgniter is an Application Development Framework - a toolkit - for people
-who build web sites using PHP. Its goal is to enable you to develop projects
-much faster than you could if you were writing code from scratch, by providing
-a rich set of libraries for commonly needed tasks, as well as a simple
-interface and logical structure to access these libraries. CodeIgniter lets
-you creatively focus on your project by minimizing the amount of code needed
-for a given task.
+Criar um sistema que contenha os seguintes cadastros:
 
-*******************
-Release Information
-*******************
+Clientes (Listagem, inclusão, edição e remoção)
+-  Código do cliente
+-  nome
+-  cpf
+-  sexo
+-  email
 
-This repo contains in-development code for future releases. To download the
-latest stable release please visit the `CodeIgniter Downloads
-<https://codeigniter.com/download>`_ page.
+Produtos (Listagem, inclusão, edição e remoção)
+-  Código do produto
+-  nome
+-  cor
+-  tamanho
+-  valor
 
-**************************
-Changelog and New Features
-**************************
+Pedidos (Listagem, inclusão, edição e remoção)
+-  Código do pedido
+-  Data do pedido
+-  Observação
+-  Forma de pagamento ( Dinheiro, Cartão, Cheque )
 
-You can find a list of all changes for each release in the `user
-guide change log <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/changelog.rst>`_.
+-  Um pedido deverá ser de um cliente
+-  Um pedido deverá conter um ou mais produtos
 
-*******************
-Server Requirements
-*******************
+O pedido terá a opção de enviar para o email do cliente
+O pedido terá a opção de ser impresso em PDF
 
-PHP version 5.6 or newer is recommended.
+Fazer também os seguintes relatórios:
+-  Relatorio de pedidos: contendo os filtros data inicial e data final para poder filtrar todos os pedidos naquele periodo
+-  Relatório totalizador por cliente: Ao selecionar um cliente nesse relatório, ele irá buscar todos os pedidos daquele cliente e retornará os pedidos com o valor total no final.
 
-It should work on 5.3.7 as well, but we strongly advise you NOT to run
-such old versions of PHP, because of potential security and performance
-issues, as well as missing features.
+**********
+Instalação
+**********
 
-************
-Installation
-************
+-  Clonar o repositório no localhost
+-  Executar o script para criação da base de dados, que se encontra na raiz do sistema, no arquivo solusoft.sql
+-  Alterar as configurações do arquivo /application/config/database.php com as configurações do servidor MySQL
+-  Executar no navegador localhost/solusoft
 
-Please see the `installation section <https://codeigniter.com/user_guide/installation/index.html>`_
-of the CodeIgniter User Guide.
+****************************
+Condições de desenvolvimento
+****************************
+
+-  SO Linux Mint 19.1 Cinnamon
+-  PHP 7.2.10
+-  MySQL 5.5.56
 
 *******
-License
+Atenção
 *******
 
-Please see the `license
-agreement <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/license.rst>`_.
+Ao incluir a última versão da biblioteca mPDF utilizando o composer, foi solicitada a instalação da extensão ext-gd no PHP.
+A dependência foi resolvida ao instalar a extensão usando: sudo apt-get install php7.2-gd
 
-*********
-Resources
-*********
-
--  `User Guide <https://codeigniter.com/docs>`_
--  `Language File Translations <https://github.com/bcit-ci/codeigniter3-translations>`_
--  `Community Forums <http://forum.codeigniter.com/>`_
--  `Community Wiki <https://github.com/bcit-ci/CodeIgniter/wiki>`_
--  `Community Slack Channel <https://codeigniterchat.slack.com>`_
-
-Report security issues to our `Security Panel <mailto:security@codeigniter.com>`_
-or via our `page on HackerOne <https://hackerone.com/codeigniter>`_, thank you.
-
-***************
-Acknowledgement
-***************
-
-The CodeIgniter team would like to thank EllisLab, all the
-contributors to the CodeIgniter project and you, the CodeIgniter user.
+A versão da extensão deve seguir a versão do PHP em execução.
