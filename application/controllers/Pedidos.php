@@ -49,6 +49,15 @@ class Pedidos extends CI_Controller {
 		echo json_encode($pedidos);
 	}
 
+	public function filtrar()
+	{
+		$this->load->model('Pedido', 'pedido', true);
+
+		$pedidos = $this->pedido->getPedidos($this->input->post());
+
+		echo json_encode($pedidos);
+	}
+
 	public function incluir()
 	{
 		$this->load->model('Pedido', 'pedido', true);

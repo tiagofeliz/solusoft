@@ -45,7 +45,7 @@ class Pedido extends CI_Model {
         return $this->db->delete('itens_pedidos', array('id' => $id));
     }
 
-    public function getPedidos(){
+    public function getPedidos($filtros = null){
         $this->db->select('pedidos.*')
                  ->select('clientes.nome')
                  ->select('clientes.sexo')
@@ -53,6 +53,9 @@ class Pedido extends CI_Model {
                  ->select('clientes.email')
                  ->from('clientes')
                  ->where('pedidos.cliente_id = clientes.id');
+        if(isset($filtros['dataInicial']) && isset($filtros['dataFinal'])){
+            $this->db->where("date(pedidos.data) >= '" . $filtros['dataInicial'] . "' and date(pedidos.data) <= '" . $filtros['dataFinal'] . "'");
+        }
         return $this->db->get('pedidos')->result();
     }
 
