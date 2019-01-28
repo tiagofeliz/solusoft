@@ -69,6 +69,6 @@ As dependências foram resolvidas ao instalar as extensões usando: **sudo apt-g
 
 A versão das extensões devem seguir a versão do PHP em execução.
 
-Pode vir ser necessário após resolver as dependências via composer, dar permissão de escrita na pasta do sistema devido a biblioteca mPDF.
+Pode vir a ser necessário após resolver as dependências via composer, dar permissão de escrita na pasta do sistema devido a biblioteca mPDF.
 
 O endereço de email tiagofeliz.solusoft@gmail.com foi criado para o envio do pedido para o email do cliente
