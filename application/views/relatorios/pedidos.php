@@ -88,7 +88,8 @@
                     <td>${adicionarMascaraDinheiro(calculaValor(pedido.produtos))}</td>
                     <td>
                         <a href="<?php echo site_url("pedidos/imprimirPedido"); ?>/${pedido.id}" class="btn btn-danger btn-sm btn-tr" role="button" target="blank"><i class="fas fa-file-pdf"></i></a>
-                        <button onclick="confirmarEnvio(${pedido.id})" class="btn btn-info btn-sm btn-tr" role="button"><i class="fas fa-paper-plane"></i></button>
+                        <button onclick="confirmarEnvio(${pedido.id})" class="btn btn-secondary btn-sm btn-tr" role="button"><i class="fas fa-paper-plane"></i></button>
+                        <a href="<?php echo site_url("pedidos/detalhes"); ?>/${pedido.id}" class="btn btn-info btn-sm btn-tr" role="button" target="blank"><i class="fas fa-eye"></i></a>
                     </td>
                 </tr>
             `);

@@ -46,7 +46,8 @@
                         <td>${this.observacao}</td>
                         <td>
                             <a href="<?php echo site_url("pedidos/imprimirPedido"); ?>/${this.id}" class="btn btn-danger btn-sm btn-tr" role="button" target="blank"><i class="fas fa-file-pdf"></i></a>
-                            <button onclick="confirmarEnvio(${this.id})" class="btn btn-info btn-sm btn-tr" role="button"><i class="fas fa-paper-plane"></i></button>
+                            <button onclick="confirmarEnvio(${this.id})" class="btn btn-secondary btn-sm btn-tr" role="button"><i class="fas fa-paper-plane"></i></button>
+                            <a href="<?php echo site_url("pedidos/detalhes"); ?>/${this.id}" class="btn btn-info btn-sm btn-tr" role="button" target="blank"><i class="fas fa-eye"></i></a>
                             <a href="<?php echo site_url("pedidos/editar"); ?>/${this.id}" class="btn btn-warning btn-sm btn-tr" role="button"><i class="fas fa-edit"></i></a>
                             <button type="button" onclick="confirmarRemocao(${this.id})" class="btn btn-danger btn-sm btn-tr" role="button"><i class="fas fa-times-circle"></i></a>
                         </td>

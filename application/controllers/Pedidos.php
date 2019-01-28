@@ -136,6 +136,13 @@ class Pedidos extends CI_Controller {
 		}
 	}
 
+	public function detalhes($id)
+	{
+		$pedido = $this->buscarPedido($id, false);
+
+		$this->load->view('pedidos/pedido_enviar.php', array('pedido' => $pedido));
+	}
+
 	public function enviaPedidoEmail()
 	{
 		$pedido = $this->buscarPedido($this->input->post('id'), false);
