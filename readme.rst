@@ -49,9 +49,9 @@ Instalação
 -  Alterar as configurações do arquivo /application/config/database.php com as configurações do servidor MySQL
 -  Executar no navegador **localhost/solusoft**
 
-****************************
-Condições de desenvolvimento
-****************************
+***************************
+Ambiente de desenvolvimento
+***************************
 
 -  SO Linux Mint 19.1 Cinnamon
 -  PHP 7.2.10
