@@ -147,4 +147,21 @@ class Pedidos extends CI_Controller {
 		$this->email->message($htmlEmail);
 		echo $this->email->send();
 	}
+
+	public function imprimirPedido($id)
+	{
+		$pedido = $this->buscarPedido($id, false);
+		
+		$mpdf = new \Mpdf\Mpdf();
+		$html = $this->load->view(
+			'pedidos/pedido_enviar.php', // página a imprimir
+			array(
+				'pedido' => $pedido // dados do pedido
+			),
+			true
+		);
+        $mpdf->SetFooter('{PAGENO}');
+        $mpdf->writeHTML($html);
+		$mpdf->Output();
+	}
 }
