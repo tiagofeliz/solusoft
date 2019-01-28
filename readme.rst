@@ -43,6 +43,7 @@ Instalação
 **********
 
 -  Clonar o repositório no localhost
+-  Incluir as dependências via: composer install
 -  Executar o script para criação da base de dados, que se encontra na raiz do sistema, no arquivo solusoft.sql
 -  Alterar as configurações do arquivo /application/config/database.php com as configurações do servidor MySQL
 -  Executar no navegador localhost/solusoft
@@ -55,11 +56,13 @@ Condições de desenvolvimento
 -  PHP 7.2.10
 -  MySQL 5.5.56
 
-*******
+#######
 Atenção
-*******
+#######
 
 Ao incluir a última versão da biblioteca mPDF utilizando o composer, foi solicitada a instalação da extensão ext-gd no PHP.
 A dependência foi resolvida ao instalar a extensão usando: sudo apt-get install php7.2-gd
 
 A versão da extensão deve seguir a versão do PHP em execução.
+
+Pode vir ser necessário após resolver as dependências via composer, dar permissão de escrita na pasta do sistema devido a biblioteca mPDF.
