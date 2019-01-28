@@ -43,11 +43,11 @@ Instalação
 **********
 
 -  Clonar o repositório no localhost
--  Na raiz do sistema, incluir as dependências via: composer install (caso retorne dependências a resolver, verifique a última seção do readme)
+-  Na raiz do sistema, incluir as dependências via: **composer install** (caso retorne dependências a resolver, verifique a última seção do readme)
 -  Criar o banco de dados de nome solusoft
--  Na raiz do sistema, executar o comando mysql -u root -p solusoft < solusoft.sql para importar o script para criação da base de dados
+-  Na raiz do sistema, executar o comando **mysql -u root -p solusoft < solusoft.sql** para importar o script para criação da base de dados
 -  Alterar as configurações do arquivo /application/config/database.php com as configurações do servidor MySQL
--  Executar no navegador localhost/solusoft
+-  Executar no navegador **localhost/solusoft**
 
 ****************************
 Condições de desenvolvimento
@@ -62,7 +62,7 @@ Atenção
 #######
 
 Ao incluir a última versão da biblioteca mPDF utilizando o composer, foi solicitada a instalação das extensões ext-gd e ext-mbstring no PHP.
-As dependências foram resolvidas ao instalar as extensões usando: sudo apt-get install php7.2-gd && sudo apt-get install php-mbstring
+As dependências foram resolvidas ao instalar as extensões usando: **sudo apt-get install php7.2-gd && sudo apt-get install php-mbstring**
 
 A versão das extensões devem seguir a versão do PHP em execução.
 
