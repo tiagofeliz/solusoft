@@ -53,8 +53,13 @@ class Pedido extends CI_Model {
                  ->select('clientes.email')
                  ->from('clientes')
                  ->where('pedidos.cliente_id = clientes.id');
+
         if(isset($filtros['dataInicial']) && isset($filtros['dataFinal'])){
             $this->db->where("date(pedidos.data) >= '" . $filtros['dataInicial'] . "' and date(pedidos.data) <= '" . $filtros['dataFinal'] . "'");
+        }
+
+        if(isset($filtros['id']) && $filtros['id'] != ""){
+            $this->db->where("pedidos.cliente_id", $filtros['id']);
         }
         return $this->db->get('pedidos')->result();
     }

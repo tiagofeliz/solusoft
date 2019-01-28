@@ -19,4 +19,11 @@ class Relatorios extends CI_Controller {
 
 		$this->load->view($this->template, $this->dados);
 	}
+
+	public function totalizadorCliente()
+	{
+		$this->dados['page'] = 'relatorios/totalizador_cliente';
+
+		$this->load->view($this->template, $this->dados);
+	}
 }
