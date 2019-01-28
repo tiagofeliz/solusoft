@@ -43,8 +43,9 @@ Instalação
 **********
 
 -  Clonar o repositório no localhost
--  Incluir as dependências via: composer install (caso retorne dependências a resolver, verifique a última seção do readme)
--  Executar o script para criação da base de dados, que se encontra na raiz do sistema, no arquivo solusoft.sql
+-  Na raiz do sistema, incluir as dependências via: composer install (caso retorne dependências a resolver, verifique a última seção do readme)
+-  Criar o banco de dados de nome solusoft
+-  Na raiz do sistema, executar o comando mysql -u root -p solusoft < solusoft.sql para importar o script para criação da base de dados
 -  Alterar as configurações do arquivo /application/config/database.php com as configurações do servidor MySQL
 -  Executar no navegador localhost/solusoft
 
