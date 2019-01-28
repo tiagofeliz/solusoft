@@ -78,7 +78,6 @@
         })
         .done(function(response){
             let pedido = JSON.parse(response)
-            console.log(pedido)
             $("tbody").append(`
                 <tr id="pedido-${pedido.id}">
                     <td>${formataData(pedido.data, 'dd/mm/yyyy')}</td>
@@ -87,12 +86,14 @@
                     <td>${pedido.observacao}</td>
                     <td>${adicionarMascaraDinheiro(calculaValor(pedido.produtos))}</td>
                     <td>
-                        <a href="<?php echo site_url("pedidos/imprimirPedido"); ?>/${pedido.id}" class="btn btn-danger btn-sm btn-tr" role="button" target="blank"><i class="fas fa-file-pdf"></i></a>
-                        <button onclick="confirmarEnvio(${pedido.id})" class="btn btn-secondary btn-sm btn-tr" role="button"><i class="fas fa-paper-plane"></i></button>
-                        <a href="<?php echo site_url("pedidos/detalhes"); ?>/${pedido.id}" class="btn btn-info btn-sm btn-tr" role="button" target="blank"><i class="fas fa-eye"></i></a>
+                        <a data-toggle="tooltip" data-placement="bottom" title="PDF" href="<?php echo site_url("pedidos/imprimirPedido"); ?>/${pedido.id}" class="btn btn-danger btn-sm btn-tr" role="button" target="blank"><i class="fas fa-file-pdf"></i></a>
+                        <button data-toggle="tooltip" data-placement="bottom" title="Eviar e-mail" onclick="confirmarEnvio(${pedido.id})" class="btn btn-secondary btn-sm btn-tr" role="button"><i class="fas fa-paper-plane"></i></button>
+                        <a data-toggle="tooltip" data-placement="bottom" title="Detalhes" href="<?php echo site_url("pedidos/detalhes"); ?>/${pedido.id}" class="btn btn-info btn-sm btn-tr" role="button" target="blank"><i class="fas fa-eye"></i></a>
                     </td>
                 </tr>
             `);
+
+            $('[data-toggle="tooltip"]').tooltip()
         })
         .fail(function(jqXHR){
             bloquearCampos(false)

@@ -187,10 +187,12 @@
                         <td>${this.sexo}</td>
                         <td>${this.email}</td>
                         <td>
-                            <button type="button" onclick="selecionarCliente(${this.id}, '${this.nome}')" class="btn btn-primary btn-sm btn-tr" role="button" data-dismiss="modal"><i class="fas fa-check"></i></a>
+                            <button data-toggle="tooltip" data-placement="bottom" title="Selecionar" type="button" onclick="selecionarCliente(${this.id}, '${this.nome}')" class="btn btn-primary btn-sm btn-tr" role="button" data-dismiss="modal"><i class="fas fa-check"></i></a>
                         </td>
                     </tr>
                 `);
+
+                $('[data-toggle="tooltip"]').tooltip()
             })
         })
         .fail(function(jqXHR){
@@ -221,10 +223,12 @@
                         <td>${this.tamanho}</td>
                         <td>${adicionarMascaraDinheiro(this.valor)}</td>
                         <td>
-                            <button type="button" onclick="selecionarProduto(${this.id}, '${this.nome}', '${this.cor}', '${this.tamanho}', ${this.valor})" class="btn btn-primary btn-sm btn-tr" role="button" data-dismiss="modal"><i class="fas fa-check"></i></a>
+                            <button data-toggle="tooltip" data-placement="bottom" title="Selecionar" type="button" onclick="selecionarProduto(${this.id}, '${this.nome}', '${this.cor}', '${this.tamanho}', ${this.valor})" class="btn btn-primary btn-sm btn-tr" role="button" data-dismiss="modal"><i class="fas fa-check"></i></a>
                         </td>
                     </tr>
                 `);
+
+                $('[data-toggle="tooltip"]').tooltip()
             })
         })
         .fail(function(jqXHR){
