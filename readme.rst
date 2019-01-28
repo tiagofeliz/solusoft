@@ -63,7 +63,7 @@ Ambiente de desenvolvimento
 Atenção
 #######
 
-Ao incluir a última versão da biblioteca mPDF utilizando o composer, foi solicitada a instalação das extensões ext-gd e ext-mbstring no PHP.
+Ao incluir a última versão da biblioteca mPDF utilizando o composer, foi solicitado **PHP 7** ou superior e a instalação das extensões ext-gd e ext-mbstring no PHP.
 As dependências foram resolvidas ao instalar as extensões usando: **sudo apt-get install php7.2-gd && sudo apt-get install php-mbstring**
 
 A versão das extensões devem seguir a versão do PHP em execução.
