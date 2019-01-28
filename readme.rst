@@ -5,6 +5,7 @@ Teste para a vaga de programador Solusoft
 Criar um sistema que contenha os seguintes cadastros:
 
 Clientes (Listagem, inclusão, edição e remoção)
+
 -  Código do cliente
 -  nome
 -  cpf
@@ -12,6 +13,7 @@ Clientes (Listagem, inclusão, edição e remoção)
 -  email
 
 Produtos (Listagem, inclusão, edição e remoção)
+
 -  Código do produto
 -  nome
 -  cor
@@ -19,6 +21,7 @@ Produtos (Listagem, inclusão, edição e remoção)
 -  valor
 
 Pedidos (Listagem, inclusão, edição e remoção)
+
 -  Código do pedido
 -  Data do pedido
 -  Observação
@@ -31,6 +34,7 @@ O pedido terá a opção de enviar para o email do cliente
 O pedido terá a opção de ser impresso em PDF
 
 Fazer também os seguintes relatórios:
+
 -  Relatorio de pedidos: contendo os filtros data inicial e data final para poder filtrar todos os pedidos naquele periodo
 -  Relatório totalizador por cliente: Ao selecionar um cliente nesse relatório, ele irá buscar todos os pedidos daquele cliente e retornará os pedidos com o valor total no final.
 
